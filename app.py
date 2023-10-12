@@ -6,9 +6,10 @@ import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 
-#loading models
-clf = pickle.load(open('clf.pkl','rb'))
-tfidfd = pickle.load(open('tfidf.pkl','rb'))
+# loading models
+clf = pickle.load(open('clf.pkl', 'rb'))
+tfidfd = pickle.load(open('tfidf.pkl', 'rb'))
+
 
 def clean_resume(resume_text):
     clean_text = re.sub('http\S+\s*', ' ', resume_text)
@@ -19,10 +20,12 @@ def clean_resume(resume_text):
     clean_text = re.sub(r'[^\x00-\x7f]', r' ', clean_text)
     clean_text = re.sub('\s+', ' ', clean_text)
     return clean_text
+
+
 # web app
 def main():
     st.title("Resume Screening App")
-    uploaded_file = st.file_uploader('Upload Resume', type=['txt','pdf'])
+    uploaded_file = st.file_uploader('Upload Resume', type=['txt', 'pdf', 'docx'])
 
     if uploaded_file is not None:
         try:
@@ -69,7 +72,6 @@ def main():
         category_name = category_mapping.get(prediction_id, "Unknown")
 
         st.write("Predicted Category:", category_name)
-
 
 
 # python main
